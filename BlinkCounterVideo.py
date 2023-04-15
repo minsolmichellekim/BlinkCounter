@@ -3,7 +3,8 @@ import cvzone
 from cvzone.FaceMeshModule import FaceMeshDetector
 from cvzone.PlotModule import LivePlot
 
-cap = cv2.VideoCapture("video/full_video.mp4")
+cap = cv2.VideoCapture("video/Videos_full/CPPG-ASD-006/ 202206301133_MVData_Reading_1_subj_CPPG-ASD-006/full_video.mp4")
+print(cap)
 #cap = cv2.VideoCapture(2) #use webcam
 # only for one face, plot it for one face
 

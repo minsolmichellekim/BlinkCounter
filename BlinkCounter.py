@@ -49,14 +49,14 @@ def blinkCount_process(cap):
 
         if ratioAvg > 350 and counter == 0:  # first time only
             blinkCounter += 1
-            color = (0, 200, 0)
+            #color = (0, 200, 0)
             counter = 1  # make counter 1
             ############Add the current timestamp and count change
         if counter != 0:
             counter += 1  # keep adding
             if counter > 10:  # if more than 10
                 counter = 0  # accept again
-                color = (255, 0, 255)
+                #color = (255, 0, 255)
             # cvzone.putTextRect(img, f'Blink Count: {blinkCounter}', (20, 60), colorR=color)
             # imgPlot = plotY.update(ratio) #give the value
         #print(blinkCounter)
@@ -79,21 +79,12 @@ def blinkCount_process(cap):
     return data
 
 
-result = blinkCount_process(cv2.VideoCapture("video/full_video.mp4"))
-#print("printing last part")
-print(result[-1])
-#print(len(blinkArray))
-filename = 'output.csv'
-with open(filename, mode='w', newline='') as file:
-    writer = csv.writer(file)
-    writer.writerow(['timestamp', 'frame_number', 'blink_count'])
-    for d in result: #data
-        writer.writerow([d['timestamp'], d['frame_number'], d['blink_count']])
+#result = blinkCount_process(cv2.VideoCapture("video/full_video.mp4"))
+#print(result[-1])
+#filename = 'output.csv'
+#with open(filename, mode='w', newline='') as file:
+#    writer = csv.writer(file)
+#    writer.writerow(['timestamp', 'frame_number', 'blink_count'])
+#    for d in result: #data
+#       writer.writerow([d['timestamp'], d['frame_number'], d['blink_count']])
 
-
-    #def main():
-    #Array = blinkCount_process(cv2.VideoCapture("video/full_video.mp4"))
-
-
-#if __name__ == '__main__':
-#    main()

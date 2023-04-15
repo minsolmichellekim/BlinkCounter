@@ -3,6 +3,7 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/.idea/BlinkCounter.iml" filepath="$PROJECT_DIR$/.idea/BlinkCounter.iml" />
+      <module fileurl="file://$PROJECT_DIR$/video/Videos_full/.idea/Videos_full.iml" filepath="$PROJECT_DIR$/video/Videos_full/.idea/Videos_full.iml" />
     </modules>
   </component>
 </project>
