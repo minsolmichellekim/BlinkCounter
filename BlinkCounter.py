@@ -2,13 +2,13 @@ import cv2
 import cvzone
 from cvzone.FaceMeshModule import FaceMeshDetector
 from cvzone.PlotModule import LivePlot
-import numpy as np
+#import numpy as np
 import csv
 
 blinkArray = []
 frame_number = 0
 data =[]
-def blinkCount_process(cap, dir):
+def blinkcount_process(cap, dir):
     detector = FaceMeshDetector(maxFaces=1)
     # plotY = LivePlot(1200, 720, [0, 500], invert=True)  # width, height , y limit
     # idList = [22, 23, 24, 26, 110, 157, 158, 159, 160, 161, 130, 243]  # point to test
@@ -23,7 +23,7 @@ def blinkCount_process(cap, dir):
     while True:
         # Start the process
         success, img = cap.read()
-        img, faces = detector.findFaceMesh(img, draw=False)  # not draw white lines on image
+        img, faces = detector.findFaceMesh(img, draw=True)  # not draw white lines on image #False?
         face = faces[0]  # get face 0 which we only have one
         # for id in idList:
         #    cv2.circle(img, face[id], 2, color, cv2.FILLED)  # draw circle on our video #size 5 purple
@@ -74,17 +74,19 @@ def blinkCount_process(cap, dir):
         data.append(frame_data)
         frame_number +=1
         if cap.get(cv2.CAP_PROP_POS_FRAMES) == cap.get(cv2.CAP_PROP_FRAME_COUNT):
+            print("ended")
             break
     # cv2.imshow("Image", img)  # show image
         #cap.release()
     return data
 
-result = blinkCount_process(cv2.VideoCapture("video/full_video.mp4"), "video/full_video.mp4")
-print(result[-1])
-filename = 'output.csv'
-with open(filename, mode='w', newline='') as file:
+filename = '202206301117_MVData_DDK_3_subj_CPPG-ASD-006'
+dir = "video/Videos_full/CPPG-ASD-006"+"/"+filename+"/full_video.mp4"
+
+with open(filename+".csv", mode='w', newline='') as file:
     writer = csv.writer(file)
     writer.writerow(['directory', 'timestamp', 'frame_number', 'blink_count'])
+    result = blinkcount_process(cv2.VideoCapture(dir), dir)
     for d in result: #data
        writer.writerow([d['directory'], d['timestamp'], d['frame_number'], d['blink_count']])
 
