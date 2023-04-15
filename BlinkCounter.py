@@ -8,7 +8,7 @@ import csv
 blinkArray = []
 frame_number = 0
 data =[]
-def blinkCount_process(cap):
+def blinkCount_process(cap, dir):
     detector = FaceMeshDetector(maxFaces=1)
     # plotY = LivePlot(1200, 720, [0, 500], invert=True)  # width, height , y limit
     # idList = [22, 23, 24, 26, 110, 157, 158, 159, 160, 161, 130, 243]  # point to test
@@ -49,14 +49,14 @@ def blinkCount_process(cap):
 
         if ratioAvg > 350 and counter == 0:  # first time only
             blinkCounter += 1
-            #color = (0, 200, 0)
+            color = (0, 200, 0)
             counter = 1  # make counter 1
             ############Add the current timestamp and count change
         if counter != 0:
             counter += 1  # keep adding
             if counter > 10:  # if more than 10
                 counter = 0  # accept again
-                #color = (255, 0, 255)
+                color = (255, 0, 255)
             # cvzone.putTextRect(img, f'Blink Count: {blinkCounter}', (20, 60), colorR=color)
             # imgPlot = plotY.update(ratio) #give the value
         #print(blinkCounter)
@@ -69,22 +69,22 @@ def blinkCount_process(cap):
         frame_rate = cap.get(cv2.CAP_PROP_FPS)
         frame_number = cap.get(cv2.CAP_PROP_POS_FRAMES)
         timestamp = frame_number / frame_rate * 1000
-        frame_data = {'timestamp': timestamp, 'frame_number': frame_number, 'blink_count': blinkCounter}
+        frame_data = {'directory': dir, 'timestamp': timestamp, 'frame_number': frame_number, 'blink_count': blinkCounter}
         #print(frame_data)
         data.append(frame_data)
         frame_number +=1
         if cap.get(cv2.CAP_PROP_POS_FRAMES) == cap.get(cv2.CAP_PROP_FRAME_COUNT):
             break
     # cv2.imshow("Image", img)  # show image
+        #cap.release()
     return data
 
-
-#result = blinkCount_process(cv2.VideoCapture("video/full_video.mp4"))
-#print(result[-1])
-#filename = 'output.csv'
-#with open(filename, mode='w', newline='') as file:
-#    writer = csv.writer(file)
-#    writer.writerow(['timestamp', 'frame_number', 'blink_count'])
-#    for d in result: #data
-#       writer.writerow([d['timestamp'], d['frame_number'], d['blink_count']])
+result = blinkCount_process(cv2.VideoCapture("video/full_video.mp4"), "video/full_video.mp4")
+print(result[-1])
+filename = 'output.csv'
+with open(filename, mode='w', newline='') as file:
+    writer = csv.writer(file)
+    writer.writerow(['directory', 'timestamp', 'frame_number', 'blink_count'])
+    for d in result: #data
+       writer.writerow([d['directory'], d['timestamp'], d['frame_number'], d['blink_count']])
 
