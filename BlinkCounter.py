@@ -24,42 +24,47 @@ def blinkcount_process(cap, dir):
         # Start the process
         success, img = cap.read()
         img, faces = detector.findFaceMesh(img, draw=True)  # not draw white lines on image #False?
-        face = faces[0]  # get face 0 which we only have one
-        # for id in idList:
-        #    cv2.circle(img, face[id], 2, color, cv2.FILLED)  # draw circle on our video #size 5 purple
 
-        leftUp = face[159]  # point on top of eye
-        leftDown = face[23]  # point of bottom of eye
-        leftLeft = face[130]
-        leftRight = face[243]
+        try: #sometimes out of range when object pass by
+            face = faces[0]  # get face 0 which we only have one
 
-        lengthHor, _ = detector.findDistance(leftUp, leftDown)
-        lengthVer, _ = detector.findDistance(leftLeft, leftRight)
+            # for id in idList:
+            #    cv2.circle(img, face[id], 2, color, cv2.FILLED)  # draw circle on our video #size 5 purple
 
-        # cv2.line(img, leftUp, leftDown, (0, 200, 0), 3)
-        # cv2.line(img, leftLeft, leftRight, (0, 200, 0), 3)
-        # print(lengthHor)  # value gets lower when blink
-        # cv2.line(img, leftUp, leftDown, (0, 200, 0), 3)  # dark green with thickness 3
+            leftUp = face[158]  # point on top of eye #159 for most
+            leftDown = face[23]  # point of bottom of eye
+            leftLeft = face[130]
+            leftRight = face[243]
 
-        ratio = lengthVer / lengthHor * 100  # smoother plot if in float
-        ratioList.append(ratio)
-        if len(ratioList) > 3:
-            ratioList.pop(0)  # pop first value
-        ratioAvg = sum(ratioList) / len(ratioList)
+            lengthHor, _ = detector.findDistance(leftUp, leftDown)
+            lengthVer, _ = detector.findDistance(leftLeft, leftRight)
 
-        if ratioAvg > 350 and counter == 0:  # first time only
-            blinkCounter += 1
-            color = (0, 200, 0)
-            counter = 1  # make counter 1
-            ############Add the current timestamp and count change
-        if counter != 0:
-            counter += 1  # keep adding
-            if counter > 10:  # if more than 10
-                counter = 0  # accept again
-                color = (255, 0, 255)
-            # cvzone.putTextRect(img, f'Blink Count: {blinkCounter}', (20, 60), colorR=color)
-            # imgPlot = plotY.update(ratio) #give the value
-        #print(blinkCounter)
+            # cv2.line(img, leftUp, leftDown, (0, 200, 0), 3)
+            # cv2.line(img, leftLeft, leftRight, (0, 200, 0), 3)
+            # print(lengthHor)  # value gets lower when blink
+            # cv2.line(img, leftUp, leftDown, (0, 200, 0), 3)  # dark green with thickness 3
+
+            ratio = lengthVer / lengthHor * 100  # smoother plot if in float
+            ratioList.append(ratio)
+            if len(ratioList) > 3:
+                ratioList.pop(0)  # pop first value
+            ratioAvg = sum(ratioList) / len(ratioList)
+
+            if ratioAvg > 355 and counter == 0:  # first time only #350 fo rmost
+                blinkCounter += 1
+                color = (0, 200, 0)
+                counter = 1  # make counter 1
+                ############Add the current timestamp and count change
+            if counter != 0:
+                counter += 1  # keep adding
+                if counter > 10:  # if more than 10
+                    counter = 0  # accept again
+                    color = (255, 0, 255)
+                # cvzone.putTextRect(img, f'Blink Count: {blinkCounter}', (20, 60), colorR=color)
+                # imgPlot = plotY.update(ratio) #give the value
+            #print(blinkCounter)
+        except:
+            continue
         if not success:
             break
         blinkArray.append(int(blinkCounter))
@@ -80,8 +85,8 @@ def blinkcount_process(cap, dir):
         #cap.release()
     return data
 
-filename = '202206301117_MVData_DDK_3_subj_CPPG-ASD-006'
-dir = "video/Videos_full/CPPG-ASD-006"+"/"+filename+"/full_video.mp4"
+filename = '202110200851_MVData_DDK_3_subj_CPPG-ASD-001-day2'
+dir = "video/Videos_full/CPPG-ASD-001"+"/"+filename+"/full_video.mp4"
 
 with open(filename+".csv", mode='w', newline='') as file:
     writer = csv.writer(file)

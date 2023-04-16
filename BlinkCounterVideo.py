@@ -3,14 +3,14 @@ import cvzone
 from cvzone.FaceMeshModule import FaceMeshDetector
 from cvzone.PlotModule import LivePlot
 
-cap = cv2.VideoCapture("video/Videos_full/CPPG-ASD-006/ 202206301133_MVData_Reading_1_subj_CPPG-ASD-006/full_video.mp4")
-print(cap)
+cap = cv2.VideoCapture("video/Videos_full/CPPG-CON-003/202206240946_MVData_DDK_1_subj_CPPG_CON_003/full_video.mp4")
+#print(cap)
 #cap = cv2.VideoCapture(2) #use webcam
 # only for one face, plot it for one face
 
 def blinkCounter(cap):
     detector = FaceMeshDetector(maxFaces = 1)
-    plotY = LivePlot(1200,720,[0,500], invert = True) #width, height , y limit
+    plotY = LivePlot(640,480,[0,500], invert = True) #width, height , y limit
 
     idList = [22,23,24, 26, 110, 157, 158, 159, 160, 161,130, 243] #point to test
     # if too far away than it will think blinked if we just measure the distance
@@ -70,17 +70,15 @@ def blinkCounter(cap):
             cvzone.putTextRect(img, f'Blink Count: {blinkCounter}', (20,60), colorR=color)
             #imgPlot = plotY.update(ratio) #give the value
             imgPlot = plotY.update(ratioAvg, color)
-            img = cv2.resize(img, (1200, 720))
+            img = cv2.resize(img, (640, 480))
             imgStack = cvzone.stackImages([img, imgPlot], 1, 1) #vertically one column 1, scale 1
             # 2 on the first one for horizontal
         else:
-            img = cv2.resize(img, (1200, 720))
+            img = cv2.resize(img, (640, 480))
             imgStack = cvzone.stackImages([img, img], 1, 1)
 
         cv2.imshow("Image Stack", imgStack)  # show image
         #cv2.imshow("Image", img)  # show image
         cv2.waitKey(20)
 
-        return totalCount
-
-print(blinkCounter(cap))
+blinkCounter(cv2.VideoCapture("video/Videos_full/CPPG-ASD-006/ 202206301133_MVData_Reading_1_subj_CPPG-ASD-006/full_video.mp4"))
