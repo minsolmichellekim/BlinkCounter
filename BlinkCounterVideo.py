@@ -3,8 +3,7 @@ import cvzone
 from cvzone.FaceMeshModule import FaceMeshDetector
 from cvzone.PlotModule import LivePlot
 
-cap = cv2.VideoCapture("video/full_video.mp4")
-#cap = cv2.VideoCapture(2) #use webcam
+# cap = cv2.VideoCapture(2) # use webcam
 # only for one face, plot it for one face
 
 def blinkCounter(cap):
@@ -21,7 +20,6 @@ def blinkCounter(cap):
     color = (255,0,255)
 
     while True:
-
         # getting object from capture --> Setting zero to not shut down the video
         if cap.get(cv2.CAP_PROP_POS_FRAMES) == cap.get(cv2.CAP_PROP_FRAME_COUNT):
             # position of current frame = total count of frame
@@ -80,6 +78,11 @@ def blinkCounter(cap):
         #cv2.imshow("Image", img)  # show image
         cv2.waitKey(20)
 
-        return totalCount
+        yield totalCount # original: return totalCount
 
-print(blinkCounter(cap))
+cap = cv2.VideoCapture("video/full_video.mp4")
+# original: print(blinkCounter(cap))
+generator = blinkCounter(cap)
+
+for count in generator: 
+     print(f"Cummulative Count: {count}")

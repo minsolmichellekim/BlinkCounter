@@ -1,0 +1,15 @@
+pip==21.1.2
+wheel==0.36.2
+mediapipe==0.8.9.1
+cvzone==1.5.4
+Pillow==9.0.0
+numpy==1.21.5
+opencv-python==4.5.5.62
+packaging==21.3
+pyparsing==3.0.6
+python-dateutil==2.8.2
+setuptools==57.0.0
+six==1.16.0
+
+#pip uninstall protobuf
+#pip install protobuf==3.20

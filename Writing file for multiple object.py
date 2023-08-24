@@ -1,4 +1,4 @@
-import BlinkCounter
+import BlinkCounter3
 # from BlinkCounter import (function name)
 import cv2
 import os
@@ -23,7 +23,7 @@ with open("BlinkCounter/BlinkCountResults.csv", "w", newline="") as file:
                     writer.writerow(['timestamp', 'frame_number', 'blink_count'])
                     cap = cv2.VideoCapture(video_file)
                     # process video file and get the blink count
-                    result = BlinkCounter.blinkCount_process(cap)
+                    result = BlinkCounter3.blinkCount_process(cap)
                     for d in result:
                         writer.writerow([d[video_file],d['timestamp'], d['frame_number'], d['blink_count']])
 
