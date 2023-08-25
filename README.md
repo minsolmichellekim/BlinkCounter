@@ -20,10 +20,9 @@
 </details>
 
 
-
 <!-- ABOUT THE PROJECT -->
 ## About The Project
-Blink Counter project s 
+Blink Counter project allows to use video recordings to count 
 
 
 <!-- GETTING STARTED -->
@@ -116,7 +115,7 @@ Don't forget to give the project a star! Thanks again!
 <!-- CONTACT -->
 ## Contact
 
-Michelle (Minsol) Kim - mk101@wellesley.edu
+Michelle (Minsol) Kim - mk101@wellesley.edu - mk9728@mit.edu
 
 Project Link: [https://github.com/michellekimgit/BlinkCounter](https://github.com/michellekimgit/BlinkCounter)
 
