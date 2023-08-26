@@ -43,13 +43,19 @@ As you can see from the example above, the subject's ratioAvg value was only abo
 (2) **BlinkCounter_all.py**
 - This code file is used to save blink count results on multiple video files. It is recommended to use this code file only when you are having multiple videos of the **same** person, as you would need to adjust the blink threshold if computing blinks on multiple people. If you are using videos with different people, use below **BlinkCounter.py** for individual calculation.
 - Once all the variables (location of eye on face map and especially the blink threshold) are determined with **BlinkCounterVideo.py** file (refer to the above file description for more information), update the variables to **BlinkCounter_all.py** code file to get all the result of blink counts within certain folder.
-- Also before running the code, specify the folder directory where videos are located by changing the variable `video_dir`. 
+- Also before running the code, specify the folder directory where videos are located by changing the variable `video_dir`.
+- The output file would have rows such as below:
+<img width="693" alt="Screenshot 2023-08-26 at 10 43 59 PM" src="https://github.com/michellekimgit/BlinkCounter/assets/94397733/8b8a6732-e8d4-4ed9-b64c-ae0a344b7441">
 
 (3) **BlinkCounter.py**
 - This code is used to get blink count result for one individual. It is recommended to use this file if you have vidoes with different people that have different threshold values, or to test if the result successfully saves before running **BlinkCounter_all.py**. Additionally, this could be use for exception cases that don't continue to run during the BlinkCounter_all.py. - Exception case may be due to a case when a person doesn't appear in the beginning or the end as this application can only be used for video where one person is present in the video. If you want it to automatically skip exceptional cases, then you can use try and except conditions. However, this is not recommended as knowing which video has exceptional case may be helpful and if skip certain timestamp, it won't be recorded in the final result.
 - For example, if the subject became missing at timestamp 116300 and the output is therefore not saving successfully, you can custom the code to exit the while True loop as below. 
  <img width="693" alt="Screenshot 2023-08-26 at 9 55 22 PM" src="https://github.com/michellekimgit/BlinkCounter/assets/94397733/12c672a7-a231-4065-a3ab-bbf4d84ee935">
 - Lastly, before running this file, you should first specify the filename and dir (directory) variables in the bottom of the code. Don't forget to also update the varialbes such as threshold or the location of eye on face map. The choice of the values can be determined by using the BlinkCounterVideo.py which shows the position of each variables (leftUp, leftDown, leftLeft etc) of the eye and the value of ratio (ratioAvg) for each frame, along with the video and ratioAvg values. Refer to the above file description of **BlinkCounterVideo.py** for more information.
+
+(4) **transform_csv.py** 
+- This code is used to convert the output file created from **BlinkCounter_all.py** or **BlinkCounter.py** into blink counts per minute for ease of interpretation.
+- You can specify the output file to be transformed by changing the variable `csv_dir = "results/ASD-009"`
 
 <!-- GETTING STARTED -->
 ## Getting Started
