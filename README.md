@@ -3,17 +3,22 @@
   <summary>Table of Contents</summary>
   <ol>
     <li>
-      <a href="#about-the-project">About The Project</a>
+      <a href="#About-Blink-Counter-Project">About Blink Counter Project </a>
+      <a href="#Overview of files">Overview of files</a>
+      <ul>
+        <li><a href="#(1) **BlinkCounterVideo.py** ">(1) **BlinkCounterVideo.py** </a></li>
+        <li><a href="#Setting virtual environment and dependenciess">Setting virtual environment and dependencies</a></li>
+        <li><a href="#Running Code files">Running Code files</a></li>
+      </ul>
     </li>
     <li>
       <a href="#getting-started">Getting Started</a>
       <ul>
         <li><a href="#Local Setup">Local Setup</a></li>
         <li><a href="#Setting virtual environment and dependenciess">Setting virtual environment and dependencies</a></li>
+        <li><a href="#Running Code files">Running Code files</a></li>
       </ul>
     </li>
-    <li><a href="#usage">Usage</a></li>
-    <li><a href="#roadmap">Roadmap</a></li>
     <li><a href="#contributing">contributing</a></li>
     <li><a href="#contact">Contact</a></li>
   </ol>
@@ -21,11 +26,12 @@
 
 
 <!-- ABOUT THE PROJECT -->
+<!-- ABOUT BLINK COUNTER PROJECT -->
 ## About Blink Counter Project 
 This pipeline includes scripts and example files for running a Blink Detection visualizer application and saving the cummulative blink per minute results to output file. 
 
 ### Overview of files 
-(1) **BlinkCounterVideo.py** 
+#### (1) **BlinkCounterVideo.py** 
 - This code file is used to visualize the blink count. Also, this code can be used to increase the accuracy of the blink count calculation for other code files.
 - The blink is determined by the ratio between eye width and eye length, which the user can specify the position of the points on the face map to be used to calculate the ratio. Specifically, for counting blinks for a person with different eye shapes, the variable leftUp (that refers to left eye upper point) can be changed to face[159] from face[158]. It is recommended to first run the video, identify the green points on the person and adjust to that gives more stable result. Usually, this value doesn't need to be changed. 
 - Another part that can be adjusted is the threshold which determines the blink count. This threshold typically range from 270-350 but this may also be dependent on the subject's shape of the eye. Also, there may be some inaccuracies if the person look away from the center by tilting or leaning towards or away. You can start with 300 and adjust this value to increase accuracy.
