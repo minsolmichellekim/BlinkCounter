@@ -22,8 +22,27 @@
 
 <!-- ABOUT THE PROJECT -->
 ## About The Project
+This pipeline includes scripts and example files for running a Blink Detection visualizer application and saving the blink per minute results to output file. 
 Blink Counter project allows to use video recordings to count 
 
+### Overview of files 
+(1) **BlinkCounterVideo.py** 
+- This code file is used to visualize the blink count. Also, this code can be used to increase the accuracy of hte blink count calculation for other code files.
+- The blink is determined by the ratio between eye width and eye length, which the user can specify the position of the points on the face map to be used to calculate the ratio. Specifically, for counting blinks for a person with different eye shapes, the variable leftUp (that refers to left eye upper point) can be changed to face[159] from face[158]. It is recommended to first run the video, identify the green points on the person and adjust to that gives more stable result.
+- Another part that can be adjusted is the threshold which determines the blink count. This threshold typically range from 270-350 but this may also be dependent on the subject's shape of the eye. Also, there may be some inaccuracies if the person look away from the center by tilting or leaning towards or away. You can start with 300 and adjust this value to increase accuracy.
+- In determining the value of the threshold, one practice you can use is to take a video of the screen and see what was the value on the display when the person blinked. If the person blinked and the value was 292, but you have set the threshold to be 300 for example, then you can adjust the threshold to be 290. Observe several blinks before determining the value for accuracy.
+- Since the change of the threshold value differs due to shape of the eye, you don't have to repeat this process if you are going to determine blink counts for the same one person in different videos.
+
+
+(2) **BlinkCounter_all.py**
+- Once all the 
+This code file is used to run blink count on multiple blink 
+
+(3) BlinkCounter.py
+- This code is used to get blink count result for one subject. It is recommended to use this file to test if the result successfully saves before running BlinkCounter_all.py. Additionally, this could be use for exception cases that don't continue to run during the BlinkCounter_all.py. Exception may be due to a case when a person doesn't appear in the beginning or the end. This application can only be used for video where one person is present in the video. If you want it to automatically skip exceptional cases, then you can use try and except conditions. However, this is not recommended as knowing which video has exceptional case may be helpful and if skip certain timestamp, it won't be recordedin the final result.
+- To run this file, you should first specify the filename and dir (directory) variables in the bottom of the code. Other variables you can adjust are leftUp (currently it is set as face[158] but it may be changed to face[159]). The choice of the value can be determined by using the BlinkCounterVideo.py which shows the position of each variables (leftUp, leftDown, leftLeft etc) of the eye and the value of ratio for each frame, along with the video of person's eyeblink.
+
+- BlinkCounterVideo.py
 
 <!-- GETTING STARTED -->
 ## Getting Started
